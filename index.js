@@ -13,7 +13,7 @@ io.on('connection', socket =>{
   console.log("Socket is ready for active connection")
   
   // This message is shown to you when you are connected to the websocket
-  socket.emit('message','Welcome to SocketChat')
+  socket.emit('message','Welcome to SocketChat') 
 
   // This message is shown to other users when you are connected to the websocket
   socket.broadcast.emit('message', 'Sayon has joined the chat')
@@ -27,6 +27,12 @@ io.on('connection', socket =>{
     // use socket.broadcast.emit('message', 'something...') to hide the message 
     // from the user who disconnects but shows to all other users instead!
     io.emit('message', 'A user has disconnected from the chat!')
+  })
+
+  // Listens for chatMessage and logs the message in the 'SERVER'
+  socket.on('chatMessage', (msg)=>{
+    // console.log(message)
+    io.emit('message', msg)
   })
 
 })
